@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2087E7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>YapaTV para Android</title>
+<meta name="robots" content="noindex"><meta property="og:site_name" content="YapaTV"><meta property="og:type" content="website"><meta property="og:url" content="https://yapatv.pages.dev/android"><meta property="og:locale" content="es_BO"><meta property="og:title" content="YapaTV para Android"><meta property="og:description" content="Descarga YapaTV en tu celular o tablet Android con un solo toque."><meta property="og:image" content="https://yapatv.pages.dev/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Nunito:wght@400;700&display=swap">
+<style>
+:root{--cielo:#E9F5FF;--azul:#2087E7;--amarillo:#F4D531;--noche:#0B2A4A}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--cielo);color:var(--noche);font:18px/1.5 Nunito,system-ui,sans-serif}
+main{max-width:560px;margin:0 auto;padding:26px 20px 44px;display:flex;flex-direction:column;gap:22px}
+.logo{height:46px;width:auto;align-self:flex-start}
+h1{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(30px,8vw,40px);line-height:1.1;margin:0}
+.btn{display:block;text-align:center;background:var(--amarillo);color:var(--noche);font-family:Poppins,sans-serif;font-weight:800;font-size:22px;padding:22px 18px;border-radius:20px;text-decoration:none}
+.btn:focus-visible{outline:3px solid var(--noche);outline-offset:3px}.btn[aria-disabled=true]{opacity:.65}
+.nota{font-size:16px;margin:-8px 0 0}
+.card{background:#fff;border-radius:24px;padding:22px}
+.card h2{font-family:Poppins,sans-serif;font-weight:800;font-size:21px;margin:0 0 10px}
+ol{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:n}
+li{counter-increment:n;position:relative;padding-left:46px}
+li:before{content:counter(n);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--amarillo);color:var(--noche);display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:17px}
+.pie{font-size:16px;margin:0}.pie a{color:var(--noche);font-weight:700}
+</style>
+</head>
+<body>
+<main>
+<img class="logo" src="assets/logo-horizontal.svg" alt="YapaTV">
+<h1>Descarga YapaTV en tu celular</h1>
+<a class="btn" data-apk="android" aria-disabled="true" href="#" onclick="return false">Descargar para Android</a>
+<p class="nota" data-nota="android">Disponible desde el lanzamiento, el 1 de diciembre de 2026.</p>
+<div class="card"><h2>Instálala en 3 pasos</h2>
+<ol><li>Toca el botón amarillo. Si aparece un aviso, elige <b>Descargar de todas formas</b>.</li><li>Abre el archivo descargado y pulsa <b>Instalar</b>. Si el celular lo pide, permite instalar desde tu navegador.</li><li>Abre YapaTV y elige tu canal.</li></ol></div>
+<p class="pie">¿Tienes una TV con Android? Abre <b>yapatv.pages.dev</b> en la TV y verás su página.<br><a href="/?completo">Ver sitio completo</a> · <a href="tv">Versión para TV</a></p>
+</main>
+<script src="config.js"></script><script src="app.js"></script>
+</body>
+</html>

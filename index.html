@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(function(){try{
+var q=location.search,u=navigator.userAgent||"",st=window.sessionStorage,m=q.match(/[?&]vista=(tv|android|pc)/);
+if(/[?&]completo\b/.test(q)||(m&&m[1]==="pc")){st.setItem("yapa-pc","1");return;}
+if(!m&&st.getItem("yapa-pc")==="1")return;
+var an=/Android/i.test(u);
+var tv=/Android TV|GoogleTV|Google TV|SmartTV|SMART-TV|BRAVIA|AFT[A-Z]+|Chromecast|SHIELD|Mi ?TV|TV Box|TVBox/i.test(u)||(an&&!/Mobile/i.test(u)&&(navigator.maxTouchPoints||0)===0&&Math.max(screen.width,screen.height)>=600);
+var d=m?m[1]:(tv?"tv":(an?"android":""));
+if(d==="tv"||d==="android")location.replace(d);
+}catch(e){}})();
+</script>
 <title>YapaTV · La tele boliviana en vivo</title>
 <meta name="description" content="Canales bolivianos legales en vivo, sin antena y con poco consumo de datos. Hecho en Oruro, Bolivia.">
 <meta name="theme-color" content="#2087E7">
@@ -10,10 +21,23 @@
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta property="og:title" content="YapaTV · La tele boliviana en vivo">
-<meta property="og:description" content="Canales bolivianos legales en vivo, gratis para el espectador.">
-<meta property="og:image" content="assets/og-image.png">
+<link rel="canonical" href="https://yapatv.pages.dev/">
+<meta property="og:site_name" content="YapaTV">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://yapatv.pages.dev/">
+<meta property="og:locale" content="es_BO">
+<meta property="og:title" content="YapaTV · La tele boliviana en vivo">
+<meta property="og:description" content="Canales bolivianos legales, gratis y en vivo. App para Android y Android TV. Lanzamiento: 1 de diciembre de 2026.">
+<meta property="og:image" content="https://yapatv.pages.dev/assets/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="YapaTV, la tele boliviana en vivo. Lanzamiento el 1 de diciembre de 2026.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YapaTV · La tele boliviana en vivo">
+<meta name="twitter:description" content="Canales bolivianos legales, gratis y en vivo. App para Android y Android TV. Lanzamiento: 1 de diciembre de 2026.">
+<meta name="twitter:image" content="https://yapatv.pages.dev/assets/og-image.jpg">
+<meta name="apple-mobile-web-app-title" content="YapaTV">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Nunito:wght@400;700&display=swap">
@@ -63,12 +87,39 @@ textarea{min-height:96px;resize:vertical}
 footer{background:var(--azul);padding:34px 0}footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 @media(max-width:860px){.hero .wrap,.canales .wrap,.contacto .wrap{grid-template-columns:1fr}.cards,.steps{grid-template-columns:1fr}.stats .wrap{grid-template-columns:1fr 1fr}nav a:not(.btn){display:none}}
+[hidden]{display:none!important}
+.btn.big{font-size:20px;padding:18px 34px}
+.dl2{display:grid;grid-template-columns:1fr 1.25fr;gap:22px}
+.dcard{background:var(--blanco);border-radius:28px;padding:30px}
+.dcard h3{font-size:24px;margin:14px 0 6px}.dcard p{margin:0 0 14px}
+.dcard ol{margin:16px 0 0;padding:0;list-style:none;counter-reset:n}
+.dcard li{counter-increment:n;position:relative;padding-left:46px;margin:14px 0}
+.dcard li:before{content:counter(n);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--amarillo);color:var(--noche);display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:17px}
+.dcard.tv{background:var(--noche);color:var(--cielo)}.dcard.tv h3{color:#fff}
+.urlrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:6px 0 4px}
+.url{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(22px,3.4vw,32px);background:#fff;color:var(--noche);border-radius:16px;padding:12px 20px}
+.k{background:var(--amarillo);color:var(--noche);border-radius:8px;padding:2px 8px;font-weight:700;white-space:nowrap}
+.donde{display:grid;grid-template-columns:1fr 1.7fr;gap:22px;align-items:start}
+.pers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.per{background:#fff;border-radius:20px;padding:16px;display:flex;gap:14px;align-items:center}
+.av{width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:20px}
+.per div:last-child{display:flex;flex-direction:column;gap:2px}
+.per b{font-family:Poppins,sans-serif;font-weight:600;font-size:18px;line-height:1.2}
+.per a.tel{color:var(--noche);font-weight:700;font-size:21px;text-decoration:none}
+.per a.wa{color:var(--noche);font-weight:700;font-size:15px}
+@media(max-width:860px){.dl2,.donde,.pers{grid-template-columns:1fr}}
+.cta{display:flex;gap:12px;flex-wrap:wrap}.cta .btn{font-size:18px}
+.dl2{grid-template-columns:1fr 1fr}
+.auto{font-size:17px;margin:24px 0 0}
+.dcard .urlrow{margin:10px 0 0}.dcard .urlrow .btn{padding:10px 20px;font-size:16px}
+.dcard.tv .url{font-size:clamp(18px,2.6vw,26px)}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"YapaTV","url":"https://yapatv.pages.dev/","logo":"https://yapatv.pages.dev/assets/icono-512.png","address":{"@type":"PostalAddress","streetAddress":"Av. Velasco Galvarro 2877, entre 12 de Octubre y Av. América","addressLocality":"Oruro","addressCountry":"BO"}}</script>
 </head>
 <body>
 <header><div class="wrap">
 <a href="#inicio" aria-label="YapaTV, inicio"><img src="assets/logo-horizontal.svg" alt="YapaTV" height="42"></a>
-<nav><a href="#que-es">¿Qué es?</a><a href="#como">Cómo ver</a><a href="#canales">Para canales</a><a href="#contacto">Contacto</a><a class="btn" href="#como" style="padding:10px 20px;font-size:16px">Descargar</a></nav>
+<nav><a href="#que-es">¿Qué es?</a><a href="#canales">Para canales</a><a href="#donde">Dónde estamos</a><a href="#contacto">Contacto</a><a class="btn" href="#descargar" style="padding:10px 20px;font-size:16px">Descargar</a></nav>
 </div></header>
 <main id="inicio">
 <div class="hero"><div class="wrap">
@@ -76,7 +127,7 @@ footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 <div class="badges"><span class="badge">En construcción</span><span class="badge b">Hecho en Oruro, Bolivia</span></div>
 <h1>La tele boliviana en vivo, en tu bolsillo</h1>
 <p>Canales legales, sin antena, con bajo consumo y funcionando con internet móvil.</p>
-<a class="btn" href="#como">Cómo verla</a>
+<div class="cta"><a class="btn" data-apk="android" href="#descargar">Descargar para Android</a><a class="btn azul" data-apk="tv" href="#descargar">Descargar para Android TV</a></div>
 </div>
 <div class="panel"><h2>Lanzamiento oficial</h2><div class="pill">1 de diciembre de 2026</div>
 <div class="count" role="timer" aria-live="off"><div><b id="d">--</b><span>días</span></div><div><b id="h">--</b><span>horas</span></div><div><b id="m">--</b><span>min</span></div><div><b id="s">--</b><span>seg</span></div></div></div>
@@ -94,14 +145,24 @@ footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><h3>Infraestructura nacional</h3><p>Una plataforma hecha en el país, para el país.</p></div>
 <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Transparencia para canales</h3><p>Reportes mensuales de audiencia para cada canal.</p></div>
 </div></div></section>
-<section id="como" style="padding-top:0"><div class="wrap">
-<h2>Cómo vas a ver</h2><p class="lead">Tres pasos y listo.</p>
-<div class="steps">
-<div class="step"><div class="num">1</div><h3>Entra a yapatv.pages.dev</h3></div>
-<div class="step"><div class="num">2</div><h3>Descarga la APK</h3><p>Liviana, se instala en unos 20 segundos.</p></div>
-<div class="step"><div class="num">3</div><h3>Elige y mira</h3><p>Calidad automática según tu internet.</p></div>
+<section id="descargar" style="padding-top:0"><div class="wrap">
+<h2>Descarga YapaTV</h2><p class="lead">Dos versiones, las dos gratis. Elige la de tu dispositivo.</p>
+<div class="dl2">
+<div class="dcard" id="dl-android"><div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+<h3>Android</h3><p>Celulares y tablets.</p>
+<a class="btn big" data-apk="android" aria-disabled="true" href="#descargar" onclick="return false">Descargar para Android</a>
+<p style="margin:12px 0 0"><small data-nota="android">Disponible desde el lanzamiento, el 1 de diciembre.</small></p>
+<ol><li>Descarga el archivo. Si aparece un aviso, elige <b>Descargar de todas formas</b>.</li><li>Ábrelo y pulsa <b>Instalar</b>. Si el celular lo pide, permite instalar desde tu navegador.</li><li>Abre YapaTV y elige tu canal.</li></ol>
+<p style="margin:16px 0 0">Si estás en una computadora, pasa el archivo al celular por cable USB, o abre <b>yapatv.pages.dev</b> desde el celular.</p></div>
+<div class="dcard tv" id="android-tv"><div class="ico" style="background:var(--amarillo)"><svg style="stroke:var(--noche)" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+<h3>Android TV</h3><p>Android TV, Google TV y TV Box.</p>
+<a class="btn big" data-apk="tv" aria-disabled="true" href="#descargar" onclick="return false">Descargar para Android TV</a>
+<p style="margin:12px 0 0"><small data-nota="tv">Disponible desde el lanzamiento, el 1 de diciembre.</small></p>
+<ol><li>En tu TV abre Google Play, instala <b>Downloader</b> (gratis) y ábrela.</li><li>Escribe esta dirección y pulsa <b>Ir</b>:<div class="urlrow"><span class="url">yapatv.pages.dev/tvapk</span><button class="btn" id="copiar" type="button">Copiar</button></div></li><li>Pulsa <b>Instalar</b>. Si el TV lo pide, activa <b>Apps de fuentes desconocidas</b> para Downloader.</li></ol>
+<p style="margin:16px 0 0">¿Prefieres USB? Descarga el archivo aquí, cópialo a una memoria USB y ábrelo desde el TV con un administrador de archivos.</p></div>
 </div>
-<div class="dl"><a class="btn" aria-disabled="true" href="#como" onclick="return false">Descargar APK</a><small>Disponible desde el lanzamiento.</small></div>
+<p class="auto">Si abres <b>yapatv.pages.dev</b> desde tu celular o desde tu TV, verás automáticamente la página para ese dispositivo.</p>
+<div style="margin-top:18px"><button class="btn azul" id="compartir" type="button" hidden>Compartir YapaTV</button></div>
 </div></section>
 <section id="canales" class="canales"><div class="wrap">
 <div><h2>¿Tienes un canal? Súmate</h2><p class="lead">Llega a todo el país sin depender del satélite.</p>
@@ -115,6 +176,13 @@ footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 <label>Mensaje<textarea name="Mensaje"></textarea></label>
 <button class="btn" type="submit">Enviar solicitud</button></form>
 </div></section>
+<section id="donde" style="padding-top:0"><div class="wrap">
+<h2>Dónde estamos</h2><p class="lead">Visítanos en Oruro o escríbenos. Estos son los números de nuestro equipo.</p>
+<div class="donde">
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Nuestra dirección</h3><p><b>Av. Velasco Galvarro 2877</b><br>entre 12 de Octubre y Av. América<br>Oruro, Bolivia</p>
+<a class="btn azul" style="margin-top:18px" href="https://maps.app.goo.gl/27N3ehp9CGWPC8o56" target="_blank" rel="noopener">Cómo llegar</a></div>
+<div class="pers"><div class="per"><div class="av" style="background:#2087E7;color:#fff">ES</div><div><b>Erick Sivila</b><a class="tel" href="tel:+59175422322" aria-label="Llamar a Erick Sivila">7542 2322</a><a class="wa" href="https://wa.me/59175422322" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Erick Sivila">WhatsApp</a></div></div><div class="per"><div class="av" style="background:#F4D531;color:#0B2A4A">JF</div><div><b>Jorge Fernandez</b><a class="tel" href="tel:+59168280424" aria-label="Llamar a Jorge Fernandez">6828 0424</a><a class="wa" href="https://wa.me/59168280424" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Jorge Fernandez">WhatsApp</a></div></div><div class="per"><div class="av" style="background:#2087E7;color:#fff">YC</div><div><b>Yulisa Copa</b><a class="tel" href="tel:+59163689415" aria-label="Llamar a Yulisa Copa">6368 9415</a><a class="wa" href="https://wa.me/59163689415" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Yulisa Copa">WhatsApp</a></div></div><div class="per"><div class="av" style="background:#F4D531;color:#0B2A4A">JP</div><div><b>Jacqueline Patricia</b><a class="tel" href="tel:+59172460607" aria-label="Llamar a Jacqueline Patricia">7246 0607</a><a class="wa" href="https://wa.me/59172460607" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Jacqueline Patricia">WhatsApp</a></div></div><div class="per"><div class="av" style="background:#2087E7;color:#fff">AM</div><div><b>Abril Mamani</b><a class="tel" href="tel:+59168294156" aria-label="Llamar a Abril Mamani">6829 4156</a><a class="wa" href="https://wa.me/59168294156" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Abril Mamani">WhatsApp</a></div></div><div class="per"><div class="av" style="background:#F4D531;color:#0B2A4A">LV</div><div><b>Leny Veniz</b><a class="tel" href="tel:+59163662890" aria-label="Llamar a Leny Veniz">6366 2890</a><a class="wa" href="https://wa.me/59163662890" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Leny Veniz">WhatsApp</a></div></div></div>
+</div></div></section>
 <section id="contacto" class="contacto"><div class="wrap">
 <div><h2>Contacto</h2><p class="lead">Publicidad, prensa y soporte. Escríbenos desde cualquier parte del país.</p><p><b>Desde Oruro, Bolivia.</b></p></div>
 <form id="f2" aria-label="Contacto">
@@ -139,6 +207,13 @@ function enviar(id,asunto){document.getElementById(id).addEventListener("submit"
 const d=new FormData(this);let b="";for(const [k,v] of d.entries())b+=k+": "+v+"\n";
 location.href="mailto:"+MAIL+"?subject="+encodeURIComponent(asunto)+"&body="+encodeURIComponent(b);});}
 enviar("f1","Solicitud de canal - YapaTV");enviar("f2","Contacto - YapaTV");
+</script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+document.getElementById("copiar").addEventListener("click",async function(){try{await navigator.clipboard.writeText("yapatv.pages.dev/tvapk");}catch(e){}this.textContent="¡Copiado!";setTimeout(()=>{this.textContent="Copiar";},1800);});
+const sb=document.getElementById("compartir");
+if(navigator.share){sb.hidden=false;sb.addEventListener("click",()=>{navigator.share({title:"YapaTV",text:"La tele boliviana en vivo. Lanzamiento: 1 de diciembre de 2026.",url:"https://yapatv.pages.dev/"}).catch(()=>{});});}
 </script>
 </body>
 </html>

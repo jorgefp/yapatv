@@ -1,0 +1,8 @@
+Pon aquí los dos archivos APK con estos nombres exactos:
+  YapaTV.apk     -> para celulares y tablets Android
+  YapaTV-TV.apk  -> para Android TV y TV Box
+
+Luego edita config.js y cambia listo:false por listo:true en cada uno.
+Direcciones cortas de descarga directa:
+  yapatv.pages.dev/apk    (Android)
+  yapatv.pages.dev/tvapk  (Android TV)
