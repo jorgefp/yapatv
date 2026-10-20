@@ -1,354 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YapaTV - La TV de Bolivia en vivo | Lanzamiento 1 de diciembre 2026</title>
-  <meta name="description" content="YapaTV es la plataforma hecha en Bolivia para ver canales de TV bolivianos legales en vivo desde tu celular o TV Box. Lanzamiento 1 de diciembre de 2026 desde Oruro.">
-  <meta property="og:title" content="YapaTV - La TV de Bolivia en vivo">
-  <meta property="og:description" content="Hecho en Bolivia. Canales legales en vivo, bajo consumo de datos. Empezamos el 1 de diciembre de 2026.">
-  <meta property="og:url" content="https://yapatv.pages.dev/">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#080810;
-      --card:#141426;
-      --card2:#1c1c33;
-      --line:#242444;
-      --pink:#ff3b5c;
-      --pink2:#ff5c7a;
-      --green:#0bbf6a;
-      --yellow:#ffbe2e;
-      --text:#f5f5fb;
-      --muted:#9aa0b8;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:"Inter",system-ui,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-    header{
-      position:sticky;top:0;z-index:50;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:14px 6%;
-      background:rgba(8,8,16,0.85);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
-    }
-    .logo{font-weight:900;font-size:1.6rem;letter-spacing:-1px}
-    .logo span{color:var(--pink)}
-    nav{display:flex;gap:28px;font-size:0.95rem;font-weight:600}
-    nav a{opacity:0.8;transition:0.2s}
-    nav a:hover{opacity:1;color:var(--pink)}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 24px;border-radius:12px;font-weight:800;font-size:0.95rem;
-      background:var(--pink);color:#fff;transition:0.2s;cursor:pointer;border:2px solid var(--pink)
-    }
-    .btn:hover{background:var(--pink2);transform:translateY(-1px)}
-    .btn.ghost{background:transparent;color:var(--text)}
-    .btn.ghost:hover{background:var(--card2);border-color:var(--text)}
-    
-    .hero{
-      position:relative;
-      padding:80px 6% 60px;
-      text-align:center;
-      background:radial-gradient(800px 400px at 50% -10%, #2a1230 0%, transparent 60%), radial-gradient(600px 300px at 90% 20%, #1a1a4a 0%, transparent 70%), var(--bg);
-    }
-    .badges{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-    .badge{
-      padding:6px 14px;border-radius:100px;font-size:0.8rem;font-weight:800;letter-spacing:0.5px;
-      border:1px solid var(--line);background:var(--card)
-    }
-    .badge.pink{background:var(--pink);border-color:var(--pink);color:#fff}
-    .badge.bo{background:#10101e}
-    .hero h1{
-      font-size:clamp(2.6rem,7vw,4.8rem);font-weight:900;line-height:0.95;letter-spacing:-2px;margin-bottom:18px
-    }
-    .hero h1 i{font-style:normal;color:var(--pink)}
-    .hero .sub{max-width:640px;margin:0 auto 32px;font-size:1.2rem;color:var(--muted);line-height:1.5}
-    
-    .countdown-wrap{max-width:700px;margin:0 auto 28px}
-    .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .cd-box{
-      background:linear-gradient(180deg,var(--card2),var(--card));
-      border:1px solid var(--line);border-radius:18px;padding:18px 10px;
-    }
-    .cd-box strong{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;display:block;color:#fff;line-height:1}
-    .cd-box small{font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
-    .launch-pill{
-      display:inline-flex;align-items:center;gap:10px;
-      margin-top:18px;padding:10px 18px;border-radius:12px;
-      border:1px dashed var(--pink);font-weight:800;font-size:0.95rem;background:rgba(255,59,92,0.08)
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-    
-    section{padding:80px 6%}
-    .section-head{max-width:720px;margin:0 auto 48px;text-align:center}
-    .section-head h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:12px}
-    .section-head p{color:var(--muted);font-size:1.1rem}
-    .alt{background:#0e0e1c;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:1100px;margin:0 auto}
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px;text-align:left;
-      transition:0.2s
-    }
-    .card:hover{border-color:#33335a;transform:translateY(-2px)}
-    .card .ic{font-size:2rem;margin-bottom:14px;width:48px;height:48px;display:grid;place-items:center;background:var(--card2);border-radius:12px;border:1px solid var(--line)}
-    .card h3{font-size:1.1rem;margin-bottom:6px;font-weight:800}
-    .card p{color:var(--muted);font-size:0.95rem;line-height:1.5}
-    
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:900px;margin:36px auto 0}
-    .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
-    .stat b{font-size:1.6rem;display:block;font-weight:900}
-    .stat span{font-size:0.8rem;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase}
-    
-    .how{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto}
-    .how div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:left}
-    .how div b{display:flex;width:32px;height:32px;align-items:center;justify-content:center;background:var(--pink);border-radius:10px;margin-bottom:14px;font-weight:900}
-    
-    .cta-box{
-      max-width:1000px;margin:0 auto;background:linear-gradient(135deg,#1a122a,#16162d);
-      border:1px solid var(--line);border-radius:24px;padding:36px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:center
-    }
-    .cta-box h3{font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:10px}
-    .cta-box p{color:var(--muted)}
-    
-    form{display:grid;gap:12px;max-width:520px}
-    input,select,textarea{
-      width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);
-      background:#101022;color:#fff;font-size:0.98rem;font-family:inherit;outline:none
-    }
-    input:focus,select:focus,textarea:focus{border-color:var(--pink)}
-    textarea{min-height:110px;resize:vertical}
-    .form-foot{font-size:0.8rem;color:var(--muted);margin-top:6px}
-    
-    footer{
-      padding:36px 6%;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;
-      font-size:0.9rem;color:var(--muted)
-    }
-    footer strong{color:var(--text)}
-    .flag{display:inline-flex;gap:4px;vertical-align:middle;margin-left:6px}
-    .flag i{display:block;width:12px;height:8px;border-radius:2px}
-    .flag i:nth-child(1){background:#d52b1e} .flag i:nth-child(2){background:#f9e300} .flag i:nth-child(3){background:#007934}
-    
-    @media(max-width:860px){
-      .how{grid-template-columns:1fr}
-      .cta-box{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      nav{display:none}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YapaTV · La tele boliviana en vivo</title>
+<meta name="description" content="Canales bolivianos legales en vivo, sin antena y con poco consumo de datos. Hecho en Oruro, Bolivia.">
+<meta name="theme-color" content="#2087E7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:title" content="YapaTV · La tele boliviana en vivo">
+<meta property="og:description" content="Canales bolivianos legales en vivo, gratis para el espectador.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Nunito:wght@400;700&display=swap">
+<style>
+:root{--cielo:#E9F5FF;--azul:#2087E7;--amarillo:#F4D531;--noche:#0B2A4A;--blanco:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;font-size:18px;line-height:1.55;color:var(--noche);background:var(--cielo)}
+h1,h2,h3,.btn{font-family:Poppins,system-ui,sans-serif;font-weight:800;line-height:1.1;margin:0}
+a{color:var(--azul)}img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:var(--blanco);box-shadow:0 1px 0 rgba(11,42,74,.1)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+nav{display:flex;gap:22px;align-items:center}nav a{color:var(--noche);text-decoration:none;font-weight:700}
+nav a:hover{color:var(--azul)}
+.btn{display:inline-block;border:0;border-radius:16px;padding:15px 28px;font-size:18px;text-decoration:none;cursor:pointer;background:var(--amarillo);color:var(--noche)}
+.btn:hover{filter:brightness(.95)}.btn.azul{background:var(--azul);color:#fff}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--noche);outline-offset:2px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.badge{background:var(--amarillo);color:var(--noche);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:99px}
+.badge.b{background:var(--blanco)}
+.hero{padding:56px 0 64px}.hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(36px,5.2vw,60px)}.hero p{font-size:21px;margin:18px 0 28px;max-width:520px}
+.panel{background:var(--azul);border-radius:32px;padding:32px;text-align:center}
+.panel h2{color:#fff;font-size:26px;margin-bottom:6px}.panel .pill{display:inline-block;background:var(--amarillo);color:var(--noche);font-weight:700;border-radius:99px;padding:4px 16px;margin-bottom:22px}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.count div{background:var(--cielo);border-radius:20px;padding:16px 4px}
+.count b{display:block;font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);line-height:1}.count span{font-size:15px;font-weight:700}
+.stats{background:var(--noche);color:var(--cielo);padding:36px 0}.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stats b{display:block;font-family:Poppins,sans-serif;font-weight:800;font-size:34px;color:var(--amarillo)}
+section{padding:72px 0}section h2{font-size:clamp(30px,4vw,42px);margin-bottom:12px}.lead{font-size:20px;max-width:640px;margin:0 0 36px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--blanco);border-radius:24px;padding:26px}.card h3{font-size:21px;margin:14px 0 6px}.card p{margin:0}
+.ico{width:52px;height:52px;border-radius:16px;background:var(--azul);display:grid;place-items:center}
+.ico svg{width:28px;height:28px;stroke:var(--cielo);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:var(--blanco);border-radius:24px;padding:26px}.num{width:48px;height:48px;border-radius:50%;background:var(--amarillo);display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:22px;margin-bottom:12px}
+.dl{margin-top:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.dl small{font-size:16px}
+.btn[aria-disabled=true]{opacity:.6;cursor:not-allowed}
+.canales{background:var(--noche);color:var(--cielo)}.canales h2{color:#fff}.canales .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.canales ul{padding:0;list-style:none;margin:0 0 8px}.canales li{padding-left:34px;margin:12px 0;position:relative}
+.canales li:before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--amarillo)}
+form{background:var(--blanco);color:var(--noche);border-radius:24px;padding:28px;display:grid;gap:14px}
+label{font-weight:700;font-size:16px;display:grid;gap:5px}
+input,select,textarea{font:inherit;color:var(--noche);border:2px solid #b9d6f0;border-radius:12px;padding:11px 13px;background:#fff;width:100%}
+textarea{min-height:96px;resize:vertical}
+.contacto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+footer{background:var(--azul);padding:34px 0}footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
+@media(max-width:860px){.hero .wrap,.canales .wrap,.contacto .wrap{grid-template-columns:1fr}.cards,.steps{grid-template-columns:1fr}.stats .wrap{grid-template-columns:1fr 1fr}nav a:not(.btn){display:none}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">YAPA<span>TV</span></div>
-    <nav>
-      <a href="#quees">Qué es</a>
-      <a href="#canales">Para canales</a>
-      <a href="#app">App</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <a href="#contacto" class="btn" style="padding:8px 16px;font-size:0.85rem">Unir mi canal</a>
-  </header>
-
-  <section class="hero">
-    <div class="badges">
-      <span class="badge pink">● EN CONSTRUCCIÓN</span>
-      <span class="badge bo">🇧🇴 HECHO EN ORURO, BOLIVIA <span class="flag"><i></i><i></i><i></i></span></span>
-    </div>
-    <h1>La tele boliviana<br><i>en vivo</i>, en tu bolsillo</h1>
-    <p class="sub">Canales legales de Bolivia en un solo lugar. Sin antena, sin cables, con bajo consumo de datos. Diseñado para funcionar hasta con internet móvil.</p>
-    
-    <div class="countdown-wrap">
-      <div class="countdown" id="countdown">
-        <div class="cd-box"><strong id="d">--</strong><small>Días</small></div>
-        <div class="cd-box"><strong id="h">--</strong><small>Horas</small></div>
-        <div class="cd-box"><strong id="m">--</strong><small>Min</small></div>
-        <div class="cd-box"><strong id="s">--</strong><small>Seg</small></div>
-      </div>
-      <div class="launch-pill"><span class="dot"></span> Lanzamiento oficial: 1 de diciembre de 2026 — 00:00 (Hora Bolivia UTC-4)</div>
-    </div>
-
-    <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="#canales" class="btn">Quiero que mi canal esté 📺</a>
-      <a href="#app" class="btn ghost">Ver cómo funciona</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><b>60+</b><span>Canales</span></div>
-      <div class="stat"><b>1080p</b><span>Full HD</span></div>
-      <div class="stat"><b>Android + TV Box</b><span>EN TODOS LADOS</span></div>
-      <div class="stat"><b>0 Bs</b><span>Para el espectador</span></div>
-    </div>
-  </section>
-
-  <section id="quees">
-    <div class="section-head">
-      <h2>¿Qué es YapaTV?</h2>
-      <p>La primera plataforma centralizada de TV boliviana legal por internet. Nace en Oruro para todo el país.</p>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <div class="ic">📺</div>
-        <h3>Canales legales en vivo</h3>
-        <p>Solo canales con autorización. Respetamos derechos de autor y apoyamos la producción nacional.</p>
-      </div>
-      <div class="card">
-        <div class="ic">📱</div>
-        <h3>App Android y TV Box</h3>
-        <p>APK directa para instalar en celular, tablet o TV Box. Sin Google Play al inicio, instalación en 20 segundos.</p>
-      </div>
-      <div class="card">
-        <div class="ic">📶</div>
-        <h3>Pensado para Bolivia</h3>
-        <p>Funciona con 3 Mbps. Modo ahorro de datos, reconexión automática si se va el internet.</p>
-      </div>
-      <div class="card">
-        <div class="ic">👤</div>
-        <h3>Tu cuenta, tus favoritos</h3>
-        <p>Guarda tus canales favoritos, historial y preferencias. Sin spam.</p>
-      </div>
-      <div class="card">
-        <div class="ic">🏔️</div>
-        <h3>Infraestructura nacional</h3>
-        <p>Servidores de alta disponibilidad operados desde Bolivia para baja latencia en todo el país.</p>
-      </div>
-      <div class="card">
-        <div class="ic">📊</div>
-        <h3>Transparencia para canales</h3>
-        <p>Cada canal ve cuánta gente lo está viendo en tiempo real. Estadísticas honestas.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="app" class="alt">
-    <div class="section-head">
-      <h2>Cómo vas a ver</h2>
-      <p>Tres pasos, 30 segundos.</p>
-    </div>
-    <div class="how">
-      <div><b>1</b><h3 style="margin-bottom:6px">Entra a yapatv.pages.dev</h3><p style="color:var(--muted)">Desde tu celular o TV Box, sin registrarte al inicio.</p></div>
-      <div><b>2</b><h3 style="margin-bottom:6px">Descarga la APK</h3><p style="color:var(--muted)">Peso liviano, menos de 15 MB. Instalación directa.</p></div>
-      <div><b>3</b><h3 style="margin-bottom:6px">Elige y mira</h3><p style="color:var(--muted)">Toca el canal. La app se adapta a tu internet automáticamente.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:36px">
-      <span class="btn" style="opacity:0.5;pointer-events:none">APK disponible el 1 de diciembre</span>
-      <div style="margin-top:10px;color:var(--muted);font-size:0.85rem">Versiones y cambios en GitHub: github.com/jorgefp/yapatv</div>
-    </div>
-  </section>
-
-  <section id="canales">
-    <div class="cta-box">
-      <div>
-        <h3>¿Tienes un canal de TV? Súmate a YapaTV</h3>
-        <p>Estamos sumando los primeros 60 canales legales de Bolivia. Si eres canal local, regional o nacional, queremos hablar contigo.</p>
-        <ul style="margin:18px 0 0 18px;color:var(--muted);font-size:0.95rem;line-height:1.7">
-          <li>Alcance nacional sin costo de satélite</li>
-          <li>Estadísticas mensuales entregadas fin de mes</li>
-          <li>Sin costo de ingreso para canales fundadores</li>
-          <li>Soporte técnico desde Oruro</li>
-        </ul>
-      </div>
-      <form id="canalForm" onsubmit="return enviarCanal(event)">
-        <select name="tipo" required>
-          <option value="">Soy...</option>
-          <option>Canal de TV abierta</option>
-          <option>Canal por cable</option>
-          <option>Canal comunitario / universitario</option>
-          <option>Productora con señal 24h</option>
-        </select>
-        <input name="canal" type="text" placeholder="Nombre del canal" required>
-        <input name="ciudad" type="text" placeholder="Ciudad / Departamento" required>
-        <input name="correo" type="email" placeholder="Correo de contacto" required>
-        <input name="whatsapp" type="tel" placeholder="WhatsApp">
-        <textarea name="mensaje" placeholder="Cuéntanos de tu canal, cobertura y señal"></textarea>
-        <button class="btn" type="submit">Enviar solicitud</button>
-        <div class="form-foot">Respondemos en 24h. Revisamos legalidad de señal antes de incorporar.</div>
-      </form>
-    </div>
-  </section>
-
-  <section id="contacto" class="alt">
-    <div class="section-head">
-      <h2>Contáctanos</h2>
-      <p>Publicidad, prensa o soporte. Desde Oruro para toda Bolivia.</p>
-    </div>
-    <div style="max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px" class="cta-box">
-      <div>
-        <h3 style="margin-bottom:12px">YapaTV — Oruro, Bolivia</h3>
-        <p style="color:var(--muted);margin-bottom:18px">Portal oficial: <b style="color:#fff">yapatv.pages.dev</b><br> Lanzamiento: 1 de diciembre de 2026<br>Correo: <b style="color:#fff">pozokoni32@gmail.com</b></p>
-        <p style="color:var(--muted);font-size:0.95rem">¿Quieres anunciar tu marca en la TV boliviana por internet? Tenemos espacios para marcas nacionales que quieran apoyar el contenido legal.</p>
-        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
-          <span class="badge bo">Respuesta < 24h</span>
-          <span class="badge bo">🇧🇴 Hecho en Bolivia</span>
-        </div>
-      </div>
-      <form onsubmit="return enviarContacto(event)">
-        <input name="nombre" type="text" placeholder="Tu nombre" required>
-        <input name="correo" type="email" placeholder="Tu correo" required>
-        <select name="motivo" required>
-          <option value="">Motivo</option>
-          <option>Quiero anunciar mi marca</option>
-          <option>Soy prensa</option>
-          <option>Soporte técnico</option>
-          <option>Otro</option>
-        </select>
-        <textarea name="mensaje" placeholder="Mensaje" required></textarea>
-        <button class="btn" type="submit">Enviar mensaje</button>
-        <div class="form-foot">Al enviar aceptas ser contactado por el equipo de YapaTV. No vendemos datos.</div>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <div>© 2026 <strong>YapaTV</strong> — Hecho en Oruro, Bolivia <span class="flag"><i></i><i></i><i></i></span> — Todos los derechos reservados.</div>
-    <div>Contacto: <strong>pozokoni32@gmail.com</strong> · Portal: yapatv.pages.dev</div>
-  </footer>
-
-  <script>
-    const lanzamiento = new Date("2026-12-01T00:00:00-04:00").getTime();
-    function tick(){
-      const diff = lanzamiento - Date.now();
-      const el = document.getElementById('countdown');
-      if(diff<=0){ el.innerHTML = "<div style='grid-column:1/-1;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:16px'><b style='font-size:1.4rem'>¡Ya estamos en vivo! 🎉</b><br><small style='color:var(--muted)'>Actualiza la página</small></div>"; return; }
-      const d = Math.floor(diff/(1000*60*60*24));
-      const h = Math.floor(diff/(1000*60*60)%24);
-      const m = Math.floor(diff/(1000*60)%60);
-      const s = Math.floor(diff/1000%60);
-      document.getElementById('d').textContent = d;
-      document.getElementById('h').textContent = String(h).padStart(2,'0');
-      document.getElementById('m').textContent = String(m).padStart(2,'0');
-      document.getElementById('s').textContent = String(s).padStart(2,'0');
-    }
-    tick(); setInterval(tick,1000);
-
-    function enviarCanal(e){
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
-      const asunto = encodeURIComponent("YapaTV - Quiero unir mi canal: " + (data.canal||""));
-      const cuerpo = encodeURIComponent(`Canal: ${data.canal||''}\nTipo: ${data.tipo||''}\nCiudad: ${data.ciudad||''}\nCorreo: ${data.correo||''}\nWhatsApp: ${data.whatsapp||''}\n\nMensaje:\n${data.mensaje||''}`);
-      window.location.href = `mailto:pozokoni32@gmail.com?subject=${asunto}&body=${cuerpo}`;
-      return false;
-    }
-    function enviarContacto(e){
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
-      const asunto = encodeURIComponent("YapaTV - Contacto web: " + (data.motivo||""));
-      const cuerpo = encodeURIComponent(`Nombre: ${data.nombre||''}\nCorreo: ${data.correo||''}\nMotivo: ${data.motivo||''}\n\nMensaje:\n${data.mensaje||''}`);
-      window.location.href = `mailto:pozokoni32@gmail.com?subject=${asunto}&body=${cuerpo}`;
-      return false;
-    }
-  </script>
+<header><div class="wrap">
+<a href="#inicio" aria-label="YapaTV, inicio"><img src="assets/logo-horizontal.svg" alt="YapaTV" height="42"></a>
+<nav><a href="#que-es">¿Qué es?</a><a href="#como">Cómo ver</a><a href="#canales">Para canales</a><a href="#contacto">Contacto</a><a class="btn" href="#como" style="padding:10px 20px;font-size:16px">Descargar</a></nav>
+</div></header>
+<main id="inicio">
+<div class="hero"><div class="wrap">
+<div>
+<div class="badges"><span class="badge">En construcción</span><span class="badge b">Hecho en Oruro, Bolivia</span></div>
+<h1>La tele boliviana en vivo, en tu bolsillo</h1>
+<p>Canales legales, sin antena, con bajo consumo y funcionando con internet móvil.</p>
+<a class="btn" href="#como">Cómo verla</a>
+</div>
+<div class="panel"><h2>Lanzamiento oficial</h2><div class="pill">1 de diciembre de 2026</div>
+<div class="count" role="timer" aria-live="off"><div><b id="d">--</b><span>días</span></div><div><b id="h">--</b><span>horas</span></div><div><b id="m">--</b><span>min</span></div><div><b id="s">--</b><span>seg</span></div></div></div>
+</div></div>
+<div class="stats"><div class="wrap">
+<div><b>60+</b>canales iniciales</div><div><b>1080p</b>Full HD</div><div><b>Sin antena</b>ahorra datos y equipos</div><div><b>0 Bs</b>para el espectador</div>
+</div></div>
+<section id="que-es"><div class="wrap">
+<h2>¿Qué es YapaTV?</h2><p class="lead">La primera plataforma boliviana que reúne en un solo lugar los canales de TV legales del país.</p>
+<div class="cards">
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Canales legales</h3><p>Cada canal es revisado y autorizado antes de entrar.</p></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>App Android y TV Box</h3><p>Mira desde tu celular o en la pantalla grande de tu casa.</p></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Pensado para Bolivia</h3><p>Funciona bien con internet móvil y cuida tus datos.</p></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/></svg></div><h3>Tu cuenta, tus favoritos</h3><p>Guarda tus canales preferidos y retoma donde quedaste.</p></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><h3>Infraestructura nacional</h3><p>Una plataforma hecha en el país, para el país.</p></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Transparencia para canales</h3><p>Reportes mensuales de audiencia para cada canal.</p></div>
+</div></div></section>
+<section id="como" style="padding-top:0"><div class="wrap">
+<h2>Cómo vas a ver</h2><p class="lead">Tres pasos y listo.</p>
+<div class="steps">
+<div class="step"><div class="num">1</div><h3>Entra a yapatv.pages.dev</h3></div>
+<div class="step"><div class="num">2</div><h3>Descarga la APK</h3><p>Liviana, se instala en unos 20 segundos.</p></div>
+<div class="step"><div class="num">3</div><h3>Elige y mira</h3><p>Calidad automática según tu internet.</p></div>
+</div>
+<div class="dl"><a class="btn" aria-disabled="true" href="#como" onclick="return false">Descargar APK</a><small>Disponible desde el lanzamiento.</small></div>
+</div></section>
+<section id="canales" class="canales"><div class="wrap">
+<div><h2>¿Tienes un canal? Súmate</h2><p class="lead">Llega a todo el país sin depender del satélite.</p>
+<ul><li>Alcance nacional sin satélite</li><li>Estadísticas mensuales entregadas a fin de mes</li><li>Sin costo de ingreso para canales fundadores</li><li>Soporte directo desde Oruro</li></ul></div>
+<form id="f1" aria-label="Solicitud de canal">
+<label>Tipo de canal<select name="Tipo"><option>TV abierta</option><option>Cable</option><option>Comunitario</option><option>Productora</option></select></label>
+<label>Nombre del canal<input name="Canal" required></label>
+<label>Ciudad / Departamento<input name="Ciudad" required></label>
+<label>Correo<input type="email" name="Correo" required></label>
+<label>WhatsApp<input type="tel" name="WhatsApp"></label>
+<label>Mensaje<textarea name="Mensaje"></textarea></label>
+<button class="btn" type="submit">Enviar solicitud</button></form>
+</div></section>
+<section id="contacto" class="contacto"><div class="wrap">
+<div><h2>Contacto</h2><p class="lead">Publicidad, prensa y soporte. Escríbenos desde cualquier parte del país.</p><p><b>Desde Oruro, Bolivia.</b></p></div>
+<form id="f2" aria-label="Contacto">
+<label>Nombre<input name="Nombre" required></label>
+<label>Correo<input type="email" name="Correo" required></label>
+<label>Motivo<select name="Motivo"><option>Publicidad</option><option>Prensa</option><option>Soporte</option><option>Otro</option></select></label>
+<label>Mensaje<textarea name="Mensaje" required></textarea></label>
+<button class="btn azul" type="submit">Enviar mensaje</button></form>
+</div></section>
+</main>
+<footer><div class="wrap"><img src="assets/logo-horizontal-fondo-azul.svg" alt="YapaTV" height="40"><p>© 2026 YapaTV · Hecho en Oruro, Bolivia · Todos los derechos reservados.</p></div></footer>
+<script>
+const T=new Date("2026-12-01T00:00:00-04:00").getTime();
+function tick(){let t=Math.max(0,T-Date.now());const p=(n)=>String(n).padStart(2,"0");
+document.getElementById("d").textContent=Math.floor(t/864e5);
+document.getElementById("h").textContent=p(Math.floor(t/36e5)%24);
+document.getElementById("m").textContent=p(Math.floor(t/6e4)%60);
+document.getElementById("s").textContent=p(Math.floor(t/1e3)%60);}
+tick();setInterval(tick,1000);
+const MAIL="pozokoni32@gmail.com";
+function enviar(id,asunto){document.getElementById(id).addEventListener("submit",function(e){e.preventDefault();
+const d=new FormData(this);let b="";for(const [k,v] of d.entries())b+=k+": "+v+"\n";
+location.href="mailto:"+MAIL+"?subject="+encodeURIComponent(asunto)+"&body="+encodeURIComponent(b);});}
+enviar("f1","Solicitud de canal - YapaTV");enviar("f2","Contacto - YapaTV");
+</script>
 </body>
 </html>
