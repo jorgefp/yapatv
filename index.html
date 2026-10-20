@@ -5,13 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 (function(){try{
-var q=location.search,u=navigator.userAgent||"",st=window.sessionStorage,m=q.match(/[?&]vista=(tv|android|pc)/);
-if(/[?&]completo\b/.test(q)||(m&&m[1]==="pc")){st.setItem("yapa-pc","1");return;}
-if(!m&&st.getItem("yapa-pc")==="1")return;
-var an=/Android/i.test(u);
+var u=navigator.userAgent||"",m=location.search.match(/[?&]vista=(tv|android|pc)/),an=/Android/i.test(u);
 var tv=/Android TV|GoogleTV|Google TV|SmartTV|SMART-TV|BRAVIA|AFT[A-Z]+|Chromecast|SHIELD|Mi ?TV|TV Box|TVBox/i.test(u)||(an&&!/Mobile/i.test(u)&&(navigator.maxTouchPoints||0)===0&&Math.max(screen.width,screen.height)>=600);
-var d=m?m[1]:(tv?"tv":(an?"android":""));
-if(d==="tv"||d==="android")location.replace(d);
+document.documentElement.setAttribute("data-vista",m?m[1]:(tv?"tv":(an?"android":"pc")));
 }catch(e){}})();
 </script>
 <title>YapaTV · La tele boliviana en vivo</title>
@@ -113,21 +109,54 @@ footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 .auto{font-size:17px;margin:24px 0 0}
 .dcard .urlrow{margin:10px 0 0}.dcard .urlrow .btn{padding:10px 20px;font-size:16px}
 .dcard.tv .url{font-size:clamp(18px,2.6vw,26px)}
+.vand,.vtv{display:none}
+html[data-vista=android] .vand,html[data-vista=tv] .vtv{display:block}
+html[data-vista=android] .vpc,html[data-vista=tv] .vpc{display:none}
+.dlb{padding:28px 0 6px}
+.dlb h1{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(30px,8vw,42px);line-height:1.08;margin:0 0 18px}
+.dlb .btn.big{display:block;text-align:center;width:100%}
+.dlb .nota{font-size:16px;margin:12px 0 18px}
+.dlb .dcard{padding:22px}.dlb .dcard h3{margin:0 0 12px;font-size:21px}
+.dlb .mas{display:inline-block;margin-top:18px;font-weight:700;color:var(--noche)}
+.vtv{font-size:clamp(20px,2.2vw,38px);line-height:1.4}
+.vtv h1{font-size:clamp(34px,5vw,86px)}
+.vtv .btn.big{display:inline-block;width:auto;font-size:clamp(26px,3.4vw,60px);padding:.6em 1.3em;border-radius:.45em}
+.vtv .btn:focus{outline:.16em solid var(--noche);outline-offset:.12em}
+.vtv .nota{font-size:.8em}
+.vtv ol.tvs{list-style:none;padding:0;margin:1.6vw 0;display:grid;gap:1.1vw;counter-reset:n}
+.vtv ol.tvs li{counter-increment:n;display:flex;gap:1.2vw;align-items:center;font-weight:700;padding:0;margin:0}
+.vtv ol.tvs li:before{content:counter(n);flex:none;width:2.1em;height:2.1em;border-radius:50%;background:var(--azul);color:#fff;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"YapaTV","url":"https://yapatv.pages.dev/","logo":"https://yapatv.pages.dev/assets/icono-512.png","address":{"@type":"PostalAddress","streetAddress":"Av. Velasco Galvarro 2877, entre 12 de Octubre y Av. América","addressLocality":"Oruro","addressCountry":"BO"}}</script>
 </head>
 <body>
 <header><div class="wrap">
 <a href="#inicio" aria-label="YapaTV, inicio"><img src="assets/logo-horizontal.svg" alt="YapaTV" height="42"></a>
-<nav><a href="#que-es">¿Qué es?</a><a href="#canales">Para canales</a><a href="#donde">Dónde estamos</a><a href="#contacto">Contacto</a><a class="btn" href="#descargar" style="padding:10px 20px;font-size:16px">Descargar</a></nav>
+<nav><a href="#que-es">¿Qué es?</a><a href="#canales">Para canales</a><a href="#donde">Dónde estamos</a><a href="#contacto">Contacto</a><a class="btn" href="#inicio" style="padding:10px 20px;font-size:16px">Descargar</a></nav>
 </div></header>
 <main id="inicio">
+<section class="dlb vand"><div class="wrap">
+<h1>Descarga YapaTV en tu celular</h1>
+<a class="btn big" data-apk="android" aria-disabled="true" href="#inicio" onclick="return false">Descargar para Android</a>
+<p class="nota" data-nota="android">Disponible desde el lanzamiento, el 1 de diciembre de 2026.</p>
+<div class="dcard"><h3>Instálala en 3 pasos</h3><ol><li>Toca el botón amarillo. Si aparece un aviso, elige <b>Descargar de todas formas</b>.</li><li>Abre el archivo y pulsa <b>Instalar</b>. Si el celular lo pide, permite instalar desde tu navegador.</li><li>Abre YapaTV y elige tu canal.</li></ol></div>
+<a class="mas" href="#que-es">Conoce más sobre YapaTV ↓</a>
+</div></section>
+<section class="dlb vtv"><div class="wrap">
+<h1>Descarga YapaTV en tu TV</h1>
+<a class="btn big" data-apk="tv" aria-disabled="true" href="#inicio" onclick="return false">Descargar para Android TV</a>
+<p class="nota" data-nota="tv">Disponible desde el lanzamiento, el 1 de diciembre de 2026.</p>
+<ol class="tvs"><li><span>Pulsa el botón amarillo.</span></li><li><span>Cuando termine, elige <b>Instalar</b>.</span></li><li><span>Abre YapaTV desde tus aplicaciones.</span></li></ol>
+<p class="nota">Si el TV te lo pide, activa <b>Apps de fuentes desconocidas</b> en Ajustes.</p>
+<p class="nota">Dirección corta para escribir en Downloader: <span class="k">yapatv.pages.dev/tvapk</span></p>
+</div></section>
 <div class="hero"><div class="wrap">
 <div>
 <div class="badges"><span class="badge">En construcción</span><span class="badge b">Hecho en Oruro, Bolivia</span></div>
 <h1>La tele boliviana en vivo, en tu bolsillo</h1>
 <p>Canales legales, sin antena, con bajo consumo y funcionando con internet móvil.</p>
-<div class="cta"><a class="btn" data-apk="android" href="#descargar">Descargar para Android</a><a class="btn azul" data-apk="tv" href="#descargar">Descargar para Android TV</a></div>
+<div class="vpc"><div class="cta"><a class="btn" data-apk="android" aria-disabled="true" href="#inicio" onclick="return false">Descargar para Android</a><a class="btn azul" data-apk="tv" aria-disabled="true" href="#inicio" onclick="return false">Descargar para Android TV</a></div>
+<p class="auto" data-nota="todos">Los APK estarán disponibles desde el lanzamiento, el 1 de diciembre.</p></div>
 </div>
 <div class="panel"><h2>Lanzamiento oficial</h2><div class="pill">1 de diciembre de 2026</div>
 <div class="count" role="timer" aria-live="off"><div><b id="d">--</b><span>días</span></div><div><b id="h">--</b><span>horas</span></div><div><b id="m">--</b><span>min</span></div><div><b id="s">--</b><span>seg</span></div></div></div>
@@ -145,25 +174,6 @@ footer p{margin:0;color:var(--blanco);font-weight:700;font-size:18px}
 <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div><h3>Infraestructura nacional</h3><p>Una plataforma hecha en el país, para el país.</p></div>
 <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Transparencia para canales</h3><p>Reportes mensuales de audiencia para cada canal.</p></div>
 </div></div></section>
-<section id="descargar" style="padding-top:0"><div class="wrap">
-<h2>Descarga YapaTV</h2><p class="lead">Dos versiones, las dos gratis. Elige la de tu dispositivo.</p>
-<div class="dl2">
-<div class="dcard" id="dl-android"><div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-<h3>Android</h3><p>Celulares y tablets.</p>
-<a class="btn big" data-apk="android" aria-disabled="true" href="#descargar" onclick="return false">Descargar para Android</a>
-<p style="margin:12px 0 0"><small data-nota="android">Disponible desde el lanzamiento, el 1 de diciembre.</small></p>
-<ol><li>Descarga el archivo. Si aparece un aviso, elige <b>Descargar de todas formas</b>.</li><li>Ábrelo y pulsa <b>Instalar</b>. Si el celular lo pide, permite instalar desde tu navegador.</li><li>Abre YapaTV y elige tu canal.</li></ol>
-<p style="margin:16px 0 0">Si estás en una computadora, pasa el archivo al celular por cable USB, o abre <b>yapatv.pages.dev</b> desde el celular.</p></div>
-<div class="dcard tv" id="android-tv"><div class="ico" style="background:var(--amarillo)"><svg style="stroke:var(--noche)" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-<h3>Android TV</h3><p>Android TV, Google TV y TV Box.</p>
-<a class="btn big" data-apk="tv" aria-disabled="true" href="#descargar" onclick="return false">Descargar para Android TV</a>
-<p style="margin:12px 0 0"><small data-nota="tv">Disponible desde el lanzamiento, el 1 de diciembre.</small></p>
-<ol><li>En tu TV abre Google Play, instala <b>Downloader</b> (gratis) y ábrela.</li><li>Escribe esta dirección y pulsa <b>Ir</b>:<div class="urlrow"><span class="url">yapatv.pages.dev/tvapk</span><button class="btn" id="copiar" type="button">Copiar</button></div></li><li>Pulsa <b>Instalar</b>. Si el TV lo pide, activa <b>Apps de fuentes desconocidas</b> para Downloader.</li></ol>
-<p style="margin:16px 0 0">¿Prefieres USB? Descarga el archivo aquí, cópialo a una memoria USB y ábrelo desde el TV con un administrador de archivos.</p></div>
-</div>
-<p class="auto">Si abres <b>yapatv.pages.dev</b> desde tu celular o desde tu TV, verás automáticamente la página para ese dispositivo.</p>
-<div style="margin-top:18px"><button class="btn azul" id="compartir" type="button" hidden>Compartir YapaTV</button></div>
-</div></section>
 <section id="canales" class="canales"><div class="wrap">
 <div><h2>¿Tienes un canal? Súmate</h2><p class="lead">Llega a todo el país sin depender del satélite.</p>
 <ul><li>Alcance nacional sin satélite</li><li>Estadísticas mensuales entregadas a fin de mes</li><li>Sin costo de ingreso para canales fundadores</li><li>Soporte directo desde Oruro</li></ul></div>
@@ -210,10 +220,6 @@ enviar("f1","Solicitud de canal - YapaTV");enviar("f2","Contacto - YapaTV");
 </script>
 <script src="config.js"></script>
 <script src="app.js"></script>
-<script>
-document.getElementById("copiar").addEventListener("click",async function(){try{await navigator.clipboard.writeText("yapatv.pages.dev/tvapk");}catch(e){}this.textContent="¡Copiado!";setTimeout(()=>{this.textContent="Copiar";},1800);});
-const sb=document.getElementById("compartir");
-if(navigator.share){sb.hidden=false;sb.addEventListener("click",()=>{navigator.share({title:"YapaTV",text:"La tele boliviana en vivo. Lanzamiento: 1 de diciembre de 2026.",url:"https://yapatv.pages.dev/"}).catch(()=>{});});}
-</script>
+<script>if(document.documentElement.getAttribute("data-vista")==="tv"){var tb=document.querySelector(".vtv [data-apk]");if(tb&&tb.focus)tb.focus();}</script>
 </body>
 </html>
